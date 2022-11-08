@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (
@@ -17,7 +18,7 @@ const Login = () => {
                         <a rel="noopener noreferrer" href="#">Forgot Password?</a>
                     </div>
                 </div>
-                <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
+                <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Login</button>
             </form>
             <div className="flex items-center pt-4 space-x-1">
                 <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
@@ -42,7 +43,7 @@ const Login = () => {
                 </button>
             </div>
             <p className="text-xs text-center sm:px-6 dark:text-gray-400">Don't have an account?
-                <a rel="noopener noreferrer" href="#" className="underline dark:text-gray-100">Sign up</a>
+                <Link rel="noopener noreferrer" to="/signup" className="underline dark:text-gray-100"> Sign up</Link>
             </p>
         </div>
      </div>

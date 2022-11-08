@@ -17,7 +17,7 @@ const Header = () => {
             title="Company"
             className="inline-flex items-center mr-8"
           >
-            <img className='w-12' src={icone} alt="" />
+            <img className='w-12 rounded-2xl' src={icone} alt="" />
             <span className="ml-2 text-2xl font-bold tracking-wide text-gray-800 uppercase">
               online seller
             </span>
