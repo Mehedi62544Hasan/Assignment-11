@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Header.css'
+import Swal from 'sweetalert2';
 import icone from '../../../assets/icone/seller.png'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
 
+  const { user, logOut } = useContext(AuthContext)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire(
+          'Good job!',
+          'Your Logout Successfull!',
+          'success'
+        )
+      })
+      .catch(error => console.error(error))
+  }
 
   return (
     <div className="header px-4 py-5 mx-auto bg-white sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -56,15 +71,34 @@ const Header = () => {
           </ul>
         </div>
         <ul className="flex items-center hidden space-x-8 lg:flex">
+
+
           <li>
-            <Link
-              to="/login"
-              className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-              aria-label="Sign up"
-              title="Sign up"
-            >
-              Login
-            </Link>
+            {
+              user?.uid ?
+                <li>
+                  <Link
+                    to="/login"
+                    onClick={handleLogOut}
+                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                    aria-label="Sign up"
+                    title="Sign up"
+                  >
+                    LogOut
+                  </Link>
+                </li>
+                : <li>
+                  <Link
+                    to="/login"
+                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                    aria-label="Sign up"
+                    title="Sign up"
+                  >
+                    Login
+                  </Link>
+                </li>
+
+            }
           </li>
         </ul>
         <div className="lg:hidden">
