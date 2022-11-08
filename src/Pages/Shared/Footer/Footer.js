@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="lg:w-1/3">
                 <Link to="#" className="flex justify-center space-x-3 lg:justify-start">
                 <img className='w-12 rounded-2xl' src={logo} alt="" />
-                    <span className="self-center text-2xl font-semibold">LEARNING HERO</span>
+                    <span className="self-center text-2xl font-semibold">ONLINE SELLER</span>
                 </Link>
             </div>
             <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
