@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ServiceItem = ({ service }) => {
 
-    const { description, image, model, name, price, rating } = service;
+    const { _id, description, image, model, name, price, rating } = service;
 
     return (
         <div className="px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pb-20">
@@ -34,8 +35,8 @@ const ServiceItem = ({ service }) => {
                         <p className='text-red-500 mr-7'>$ {price}</p>
                     </div>
                     <div className="flex items-center">
-                        <a
-                            href="/"
+                        <Link
+                            to= ""
                             aria-label=""
                             className="inline-flex items-center font-semibold transition-colors duration-200 text-blue-700 hover:text-red-600"
                         >
@@ -47,7 +48,7 @@ const ServiceItem = ({ service }) => {
                             >
                                 <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z" />
                             </svg>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
