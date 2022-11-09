@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Review from '../Review/Review';
 
@@ -16,7 +16,8 @@ const Details = () => {
 
     const addService = {
       user,
-      review
+      review,
+      id: _id
     }
 
     fetch('http://localhost:5000/review', {
@@ -34,18 +35,21 @@ const Details = () => {
           alert('post successfully')
         }
       })
+      .catch(err => alert(err))
   }
 
   useEffect(() => {
     fetch('http://localhost:5000/review')
       .then(res => res.json())
       .then(data => setReviews(data))
-  }, [])
+  }, [reviews])
 
 
   const handleHaveUser = () =>{
  
   }
+
+  const itemsReview = reviews.filter(rev => _id === rev?.id)
 
   return (
 
@@ -86,9 +90,9 @@ const Details = () => {
 
       <div>
         {
-          reviews.map(review => <Review
+          itemsReview.map(review => <Review
           key={review._id}
-          singleReview={review}
+          serviceReview={review}
           ></Review>)
         }
       </div>

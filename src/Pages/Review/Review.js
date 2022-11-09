@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Review = ({singleReview}) => {
+const Review = ({serviceReview}) => {
 
-    const {review, user} = singleReview;
+    const {review, user} = serviceReview;
      console.log(user?.displayName)
 
     return (

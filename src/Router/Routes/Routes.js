@@ -3,6 +3,7 @@ import Main from "../../Layout/Main";
 import Details from "../../Pages/Details/Details";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import MyReviews from "../../Pages/MyReviews/MyReviews";
 import ServiceAll from "../../Pages/ServiceAll/ServiceAll";
  import AddService from "../../Pages/Shared/AddService/AddService";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
                 path: '/services',
                 element: <ServiceAll></ServiceAll>,
                 loader: () => fetch('http://localhost:5000/services')
+            },
+            {
+                path: '/myReviews',
+                element: <MyReviews></MyReviews>,
+                loader: () => fetch('http://localhost:5000/review')
             },
             {
                 path: '/addservice',
