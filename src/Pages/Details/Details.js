@@ -1,23 +1,21 @@
-import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Review from '../Review/Review';
 
 const Details = () => {
   const { _id, description, image, model, name, price, rating } = useLoaderData();
   const { user } = useContext(AuthContext);
-  const { displayName, email, photoURL, } = user;
+  const [reviews, setReviews] = useState([]);
 
   const handlePressOrder = event => {
     event.preventDefault()
+    handleHaveUser()
     const review = event.target.review.value;
     console.log(name, model, description, price, rating, image)
 
     const addService = {
-      _id,
-      displayName,
-      email,
-      photoURL,
+      user,
       review
     }
 
@@ -36,6 +34,17 @@ const Details = () => {
           alert('post successfully')
         }
       })
+  }
+
+  useEffect(() => {
+    fetch('http://localhost:5000/review')
+      .then(res => res.json())
+      .then(data => setReviews(data))
+  }, [])
+
+
+  const handleHaveUser = () =>{
+ 
   }
 
   return (
@@ -76,8 +85,12 @@ const Details = () => {
       </div>
 
       <div>
-        <img src={photoURL} alt="" />
-        <h1>jadio fumaioduj</h1>
+        {
+          reviews.map(review => <Review
+          key={review._id}
+          singleReview={review}
+          ></Review>)
+        }
       </div>
     </div>
 
