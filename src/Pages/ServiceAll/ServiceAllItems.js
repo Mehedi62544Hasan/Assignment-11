@@ -5,7 +5,7 @@ const ServiceAllItems = ({service}) => {
     const { description, image, model, name, price, rating } = service;
 
     return (
-        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div className="px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pb-20">
             <div className="flex flex-col max-w-screen-lg overflow-hidden bg-white border rounded shadow-sm lg:flex-row sm:mx-auto">
                 <div className="relative lg:w-1/2">
                     <img
@@ -39,7 +39,7 @@ const ServiceAllItems = ({service}) => {
                             aria-label=""
                             className="inline-flex items-center font-semibold transition-colors duration-200 text-blue-700 hover:text-red-600"
                         >
-                            Learn More
+                            More Details
                             <svg
                                 className="inline-block w-3 ml-2"
                                 fill="currentColor"

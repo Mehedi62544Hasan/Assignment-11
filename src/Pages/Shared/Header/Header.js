@@ -48,17 +48,20 @@ const Header = () => {
                 Home
               </a>
             </li>
-            <li>
+            {
+              user?.email && 
+              <div className='flex align-center'>
+              <>
               <a
                 href="/"
-                aria-label="Our product"
+                 aria-label="Our product"
                 title="Our product"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className="font-medium mr-8 tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 My reviews
               </a>
-            </li>
-            <li>
+            </>
+            <>
               <a
                 href="/"
                 aria-label="About us"
@@ -67,7 +70,9 @@ const Header = () => {
               >
                 About us
               </a>
-            </li>
+            </>
+              </div>
+            }
           </ul>
         </div>
         <ul className="flex items-center hidden space-x-8 lg:flex">
@@ -76,7 +81,7 @@ const Header = () => {
           <li>
             {
               user?.uid ?
-                <li>
+                <>
                   <Link
                     to="/login"
                     onClick={handleLogOut}
@@ -86,8 +91,8 @@ const Header = () => {
                   >
                     LogOut
                   </Link>
-                </li>
-                : <li>
+                </>
+                : <>
                   <Link
                     to="/login"
                     className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
@@ -96,7 +101,7 @@ const Header = () => {
                   >
                     Login
                   </Link>
-                </li>
+                </>
 
             }
           </li>
