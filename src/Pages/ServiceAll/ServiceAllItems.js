@@ -29,10 +29,10 @@ const ServiceAllItems = ({service}) => {
                         </p>
                     </div>
                     <h5 className="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">{model}</h5>
-                    <p className="mb-5 text-gray-800">{description.slice(100)}...</p>
+                    <p className="mb-5 text-gray-800">{description.slice(0, 100)}...</p>
                     <div className='flex align-center justify-between mb-5'>
                         <p>Rating: {rating}</p>
-                        <p className='text-red-500 mr-7'>$ {price}</p>
+                        <p className='text-red-500 mr-7 text-xl font-bold'>$ {price}</p>
                     </div>
                     <div className="flex items-center">
                         <Link

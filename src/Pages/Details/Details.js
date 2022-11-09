@@ -1,57 +1,98 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import Review from '../Review/Review';
 
 const Details = () => {
-  const {name, model} = useLoaderData();
-  console.log(name)
-    return (
-        <div className="flex flex-col justify-between max-w-xl px-4 mx-auto lg:pt-16 lg:flex-row md:px-8 lg:max-w-screen-xl">
-        <div className="pt-16 mb-16 lg:mb-0 lg:pt-32 lg:max-w-lg lg:pr-5">
-          <div className="max-w-xl mb-6">
-            <div>
-              <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-                {name}
-              </p>
-            </div>
-            <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-              The quick, brown fox
-              <br className="hidden md:block" />
-              jumps over{' '}
-              <span className="inline-block text-deep-purple-accent-400">
-                a lazy dog
-              </span>
-            </h2>
-            <p className="text-base text-gray-700 md:text-lg">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae. explicabo.
+  const { _id, description, image, model, name, price, rating } = useLoaderData();
+  const { user } = useContext(AuthContext);
+  const { displayName, email, photoURL, } = user;
+
+  const handlePressOrder = event => {
+    event.preventDefault()
+    const review = event.target.review.value;
+    console.log(name, model, description, price, rating, image)
+
+    const addService = {
+      _id,
+      displayName,
+      email,
+      photoURL,
+      review
+    }
+
+    fetch('http://localhost:5000/review', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(addService)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data.acknowledged) {
+          event.target.reset()
+          alert('post successfully')
+        }
+      })
+  }
+
+  return (
+
+    <div>
+      <div>
+        <img
+          src={image}
+          className="w-4/5 mx-auto"
+          alt=""
+        />
+      </div>
+      <div className="w-4/5 mx-auto">
+        <div className="  mb-6">
+          <div>
+            <p className="flex justify-center px-3 mb-4 mt-16 text-xl font-bold text-lime-400 uppercase">
+              {name}
             </p>
           </div>
-          <div className="flex items-center">
-            <a
-              href="/"
-              className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-            >
-              Get started
-            </a>
-            <a
-              href="/"
-              aria-label=""
-              className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
-            >
-              Learn more
-            </a>
+          <h2 className="flex justify-center text-blue-600 mb-6 text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none">
+            {model}
+          </h2>
+          <p className="text-base text-gray-700 md:text-lg">
+            {description}
+          </p>
+          <div className='flex align-center justify-between my-5'>
+            <p>Rating: {rating}</p>
+            <p className='text-red-500 mr-7 text-xl font-bold'>$ {price}</p>
           </div>
         </div>
         <div>
-          <img
-            src="https://kitwind.io/assets/kometa/two-thirds-phone.png"
-            className="object-cover object-top w-full h-64 mx-auto lg:h-auto xl:mr-24 md:max-w-sm"
-            alt=""
-          />
+          <form onSubmit={handlePressOrder}>
+            <textarea name="review" className="textarea textarea-secondary my-4 w-full" placeholder="message"></textarea>
+            <input type="submit" value="Post" className='btn bg-blue-600 px-24' />
+          </form>
         </div>
+
       </div>
-    );
+
+      <div>
+        <img src={photoURL} alt="" />
+        <h1>jadio fumaioduj</h1>
+      </div>
+    </div>
+
+  );
 };
 
 export default Details;
+
+
+
+
+
+
+
+
+
+
+

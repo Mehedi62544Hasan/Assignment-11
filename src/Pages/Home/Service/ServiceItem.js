@@ -29,14 +29,14 @@ const ServiceItem = ({ service }) => {
                         </p>
                     </div>
                     <h5 className="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">{model}</h5>
-                    <p className="mb-5 text-gray-800">{description}</p>
+                    <p className="mb-5 text-gray-800">{description.slice(0, 100)}</p>
                     <div className='flex align-center justify-between mb-5'>
                         <p>Rating: {rating}</p>
-                        <p className='text-red-500 mr-7'>$ {price}</p>
+                        <p className='text-red-500 mr-7 text-xl font-bold'>$ {price}</p>
                     </div>
                     <div className="flex items-center">
                         <Link
-                            to= ""
+                            to={`/services/${_id}`}
                             aria-label=""
                             className="inline-flex items-center font-semibold transition-colors duration-200 text-blue-700 hover:text-red-600"
                         >
