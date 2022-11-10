@@ -30,6 +30,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const updateUserProfile = profile => {
+        setLoader(true);
         return updateProfile(auth.currentUser, profile)
     }
 

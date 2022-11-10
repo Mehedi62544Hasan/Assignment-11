@@ -44,7 +44,7 @@ const AddService = () => {
 
     return (
         <div className='mt-14 mx-5'>
-            <div className='font-bold text-4xl flex justify-center mb-10'><span className='text-lime-500'>PLACE ADD</span> <span className='text-red-500'>PRODUCT</span></div>
+            <div className='font-bold text-xl lg:text-4xl flex justify-center mb-10'><span className='text-lime-500'>PLACE ADD</span><span className='text-red-500 ml-2'>PRODUCTS</span></div>
             <form onSubmit={handlePressOrder}>
                  <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
                     <input name="name" type="text" placeholder="Name" className="input input-bordered input-secondary w-full" />

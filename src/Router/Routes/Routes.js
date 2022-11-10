@@ -6,6 +6,7 @@ import Login from "../../Pages/Login/Login";
 import MyReviews from "../../Pages/MyReviews/MyReviews";
 import ServiceAll from "../../Pages/ServiceAll/ServiceAll";
  import AddService from "../../Pages/Shared/AddService/AddService";
+import PrivateRout from "../../Pages/Shared/PrivateRout/PrivateRout";
 import SignUp from "../../Pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
@@ -24,12 +25,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/myReviews',
-                element: <MyReviews></MyReviews>,
+                element: <PrivateRout><MyReviews></MyReviews></PrivateRout>,
                 loader: () => fetch('http://localhost:5000/review')
             },
             {
                 path: '/addservice',
-                element: <AddService></AddService>
+                element: <PrivateRout><AddService></AddService></PrivateRout>
             },
             {
                 path: '/services/:id',
