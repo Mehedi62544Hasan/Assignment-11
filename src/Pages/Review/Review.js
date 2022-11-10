@@ -1,39 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Review.css';
+ import './Review.css';
 
-const Review = ({ serviceReview, handleDelete, handleUpdate }) => {
+const Review = ({ serviceReview, handleDelete }) => {
 
-    const { _id, review, model, status, user } = serviceReview;
-
-    return (<>
-        {user && user?.uid ? 
-            <div className='flex bg-white p-2 m-5 lg:w-3/5 rounded-md relative'>
-                {
-                    user?.photoURL ? <img src={user?.photoURL} alt="" className='w-10 h-10 rounded-full mr-5' />
-                   : <img src='https://static-media-prod-cdn.itsre-sumo.mozilla.net/static/default-FFA-avatar.2f8c2a0592bda1c5.png' alt="" className='w-10 h-10 rounded-full mr-5' />
-                }
-                <div>
-                    <h1 className='font-bold'>{user?.displayName}</h1>
-                    <h1>{review}</h1>
-                    <div className='flex'>
-                        <p className='text-lime-600'><small>{model}</small></p>
-                        <div className='mr-7 absolute bottom-2 right-0'>
-                            <button onClick={() => handleUpdate(_id)} className='button'>{status ? status : 'Update'}</button>
-                            <button onClick={() => handleDelete(_id)} className="button">Delete</button>
-                        </div>
+    const { _id, review, model, user } = serviceReview;
+ 
+    return (
+        <div className='flex bg-white p-2 m-5 lg:w-3/5 rounded-md relative'>
+            {
+                user?.photoURL ? <img src={user?.photoURL} alt="" className='w-10 h-10 rounded-full mr-5' />
+                    : <img src='https://static-media-prod-cdn.itsre-sumo.mozilla.net/static/default-FFA-avatar.2f8c2a0592bda1c5.png' alt="" className='w-10 h-10 rounded-full mr-5' />
+            }
+            <div>
+                <h1 className='font-bold'>{user?.displayName}</h1>
+                <h1>{review}</h1>
+                <div className='flex'>
+                    <p className='text-lime-600'><small>{model}</small></p>
+                    <div className='mr-7 absolute bottom-2 right-0'>
+                        <Link to={`/update/${_id}`}><button className='button'>Update</button></Link>
+                        <button onClick={() => handleDelete(_id)} className="button">Delete</button>
                     </div>
                 </div>
             </div>
-            :
-            <>
-                <div>
-                    <h2>Sorry No user Available Please </h2>
-                    <Link to="/login">Log in</Link>
-                </div>
-            </> 
-        };
-    </>
+        </div>
     )
 }
 export default Review;

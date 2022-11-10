@@ -3,6 +3,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Review from '../Review/Review';
 import Swal from 'sweetalert2';
 import useTitle from '../../Hooks/useTitle';
+import { Link } from 'react-router-dom';
 
 
 const MyReviews = () => {
@@ -11,7 +12,7 @@ const MyReviews = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/review?email=${user?.email}`)
+        fetch(`https://online-seller-server.vercel.app/review?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setReviews(data)
@@ -21,7 +22,7 @@ const MyReviews = () => {
     const handleDelete = id => {
         const proceed = window.confirm('are you want to delete products');
         if (proceed) {
-            fetch(`http://localhost:5000/review/${id}`, {
+            fetch(`https://online-seller-server.vercel.app/review/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -30,8 +31,8 @@ const MyReviews = () => {
                         'Good job!',
                         'Delete Successfull!',
                         'success'
-                      )
-                     if (data.deletedCount < 0) {
+                    )
+                    if (data.deletedCount < 0) {
                         const rev = reviews.filter(odr => odr._id !== id);
                         setReviews(rev);
                     }
@@ -40,36 +41,40 @@ const MyReviews = () => {
     }
 
 
-    const handleUpdate = id => {
-        fetch(`http://localhost:5000/review/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({ status: 'Success' })
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    const remaining = reviews.filter(rev => rev._id !== id);
-                    const approving = reviews.find(rev => rev._id === id);
-                    approving.status = 'Approved';
-                    const newReview = [...remaining, approving];
-                    setReviews(newReview);
-                }
-            })
-    }
-
     return (
         <div className='mt-16 lg:ml-10'>
-            {
-                reviews.map(review => <Review
-                    key={review._id}
-                    serviceReview={review}
-                    handleDelete={handleDelete}
-                    handleUpdate={handleUpdate}
-                ></Review>)
-            }
+             {user.uid && reviews.length ? (
+            <>
+                {
+                    reviews.map(review => <Review
+                        key={review._id}
+                        serviceReview={review}
+                        handleDelete={handleDelete}
+                    ></Review>)
+                }
+            </>
+             ) : (
+                <>
+                    <div className=" grid h-screen place-items-center ">
+                        <h2 className=" text-lime-500 font-bold text-xl ml-2">
+                            No reviews were added Please
+                            {user.uid ? (
+                                <>
+                                    <Link to="/services">
+                                        <span className="underline text-red-700">Post Review</span>
+                                    </Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/login">
+                                        <span className="underline text-red-700">Log in</span>
+                                    </Link>{" "}
+                                </>
+                            )}
+                        </h2>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
@@ -77,3 +82,40 @@ const MyReviews = () => {
 export default MyReviews;
 
 
+
+
+// <div className="grid grid-cols-3 gap-10 my-10 p-5">
+//     {user.uid && reviews.length ? (
+//         <>
+//             {reviews.map((review) => (
+//                 <MyReview
+//                     key={review._id}
+//                     review={review}
+//                     handleDelete={handleDelete}
+//                     reviews={reviews}
+//                 ></MyReview>
+//             ))}
+//         </>
+//     ) : (
+//         <>
+//             <div className=" grid h-screen place-items-center ">
+//                 <h2 className="my-36 text-red-400 font-bold text-xl ml-2">
+//                     No reviews were added Please
+//                     {user.uid ? (
+//                         <>
+//                             <Link to="/services">
+//                                 <span className="underline text-red-700">Post Review</span>
+//                             </Link>
+//                         </>
+//                     ) : (
+//                         <>
+//                             <Link to="/login">
+//                                 <span className="underline text-red-700">Log in</span>
+//                             </Link>{" "}
+//                         </>
+//                     )}
+//                 </h2>
+//             </div>
+//         </>
+//     )}
+// </div>

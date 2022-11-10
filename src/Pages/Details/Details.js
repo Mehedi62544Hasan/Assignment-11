@@ -14,6 +14,8 @@ const Details = () => {
   const [reviews, setReviews] = useState([]);
   useTitle('Details')
 
+  const time = new Date().getTime()
+
   const email = user?.email;
 
   const handlePressOrder = event => {
@@ -25,10 +27,11 @@ const Details = () => {
       email,
       review,
       model,
-      id: _id
+      id: _id,
+      time
     }
 
-    fetch('http://localhost:5000/review', {
+    fetch('https://online-seller-server.vercel.app/review', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -46,7 +49,7 @@ const Details = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:5000/review')
+    fetch('https://online-seller-server.vercel.app/review')
       .then(res => res.json())
       .then(data => {
         setReviews(data)
@@ -58,7 +61,7 @@ const Details = () => {
   const handleDelete = id => {
     const proceed = window.confirm('are you want to delete products');
     if (proceed) {
-      fetch(`http://localhost:5000/review/${id}`, {
+      fetch(`https://online-seller-server.vercel.app/review/${id}`, {
         method: 'DELETE'
       })
         .then(res => res.json())
@@ -74,27 +77,6 @@ const Details = () => {
           }
         })
     }
-  }
-
-  const handleUpdate = id => {
-    fetch(`http://localhost:5000/review/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ status: 'Success' })
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        if (data.modifiedCount > 0) {
-          const remaining = reviews.filter(rev => rev._id !== id);
-          const approving = reviews.find(rev => rev._id === id);
-          approving.status = 'Approved';
-          const newReview = [...remaining, approving];
-          setReviews(newReview);
-        }
-      })
   }
 
   return (
@@ -142,8 +124,7 @@ const Details = () => {
           itemsReview.map(review => <Review
             key={review._id}
             serviceReview={review}
-            handleUpdate={handleUpdate}
-            handleDelete={handleDelete}
+             handleDelete={handleDelete}
           ></Review>)
         }
       </div>
