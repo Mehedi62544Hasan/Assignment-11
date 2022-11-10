@@ -96,7 +96,7 @@ const SignUp = () => {
                         <input type="text" name="name" id="username" placeholder="UserName" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required />
                     </div>
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="username" className="block dark:text-gray-400">Emage URL</label>
+                        <label htmlFor="username" className="block dark:text-gray-400">Image URL</label>
                         <input type="text" name="image" id="image" placeholder="Image URL" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
                     <div className="space-y-1 text-sm">

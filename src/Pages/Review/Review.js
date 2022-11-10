@@ -9,7 +9,10 @@ const Review = ({ serviceReview, handleDelete, handleUpdate }) => {
     return (<>
         {user && user?.uid ? 
             <div className='flex bg-white p-2 m-5 lg:w-3/5 rounded-md relative'>
-                <img src={user?.photoURL} alt="" className='w-10 h-10 rounded-full mr-5' />
+                {
+                    user?.photoURL ? <img src={user?.photoURL} alt="" className='w-10 h-10 rounded-full mr-5' />
+                   : <img src='https://static-media-prod-cdn.itsre-sumo.mozilla.net/static/default-FFA-avatar.2f8c2a0592bda1c5.png' alt="" className='w-10 h-10 rounded-full mr-5' />
+                }
                 <div>
                     <h1 className='font-bold'>{user?.displayName}</h1>
                     <h1>{review}</h1>

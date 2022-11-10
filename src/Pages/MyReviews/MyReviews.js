@@ -13,7 +13,9 @@ const MyReviews = () => {
     useEffect(() => {
         fetch(`http://localhost:5000/review?email=${user?.email}`)
             .then(res => res.json())
-            .then(data => setReviews(data))
+            .then(data => {
+                setReviews(data)
+            })
     }, [user?.email, reviews])
 
     const handleDelete = id => {

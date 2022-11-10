@@ -19,8 +19,7 @@ const Details = () => {
   const handlePressOrder = event => {
     event.preventDefault()
     const review = event.target.review.value;
-    console.log(name, model, description, price, rating, image)
-
+ 
     const addService = {
       user,
       email,
@@ -49,7 +48,9 @@ const Details = () => {
   useEffect(() => {
     fetch('http://localhost:5000/review')
       .then(res => res.json())
-      .then(data => setReviews(data))
+      .then(data => {
+        setReviews(data)
+      })
   }, [reviews])
 
   const itemsReview = reviews.filter(rev => _id === rev?.id)
