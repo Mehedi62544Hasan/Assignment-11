@@ -26,8 +26,8 @@ const Header = () => {
     <div className="header px-4 py-5 mx-auto bg-white sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
       <div className="relative flex items-center justify-between">
         <div className="flex items-center">
-          <a
-            href="/"
+          <Link
+            to="/"
             aria-label="Onlice Seller"
             title="Onlice Seller"
             className="inline-flex items-center mr-8"
@@ -36,17 +36,27 @@ const Header = () => {
             <span className="ml-2 text-2xl font-bold tracking-wide text-gray-800 uppercase">
               ONLINE SELLER
             </span>
-          </a>
+          </Link>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
-              <a
-                href="/"
+              <Link
+                to="/"
                 aria-label="Home"
                 title="Home"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg" 
               >
                 Home
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/blogs"
+                aria-label="Home"
+                title="Home"
+                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg" 
+              >
+                Blogs
+              </Link>
             </li>
             {
               user?.email &&
@@ -56,7 +66,7 @@ const Header = () => {
                     to="/myReviews"
                     aria-label="My reviews"
                     title="My reviews"
-                    className="font-medium mr-8 tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                    className="font-medium mr-8 tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg" 
                   >
                     My reviews
                   </Link>
@@ -66,7 +76,7 @@ const Header = () => {
                     to="/addservice"
                     aria-label="Add Service"
                     title="Add Service"
-                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg" 
                   >
                     Add Service
                   </Link>
@@ -75,15 +85,15 @@ const Header = () => {
             }
           </ul>
         </div>
-        <ul className="flex items-center space-x-8 lg:flex">
+        <ul className="flex items-center hidden space-x-8 lg:flex">
           <li>
             {
               user?.uid ?
                 <>
                   <Link
-                    to="/login"
+                    to="/"
                     onClick={handleLogOut}
-                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                     aria-label="LogOut"
                     title="LogOut"
                   >
@@ -93,7 +103,7 @@ const Header = () => {
                 : <>
                   <Link
                     to="/login"
-                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                     aria-label="Login"
                     title="Login"
                   >
@@ -130,8 +140,8 @@ const Header = () => {
               <div className="p-5 bg-white border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <a
-                      href="/"
+                    <Link
+                      to="/"
                       aria-label="Onlice Seller"
                       title="Onlice Seller"
                       className="inline-flex items-center"
@@ -140,7 +150,7 @@ const Header = () => {
                       <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                         ONLINE SELLER
                       </span>
-                    </a>
+                    </Link>
                   </div>
                   <div>
                     <button
@@ -161,43 +171,61 @@ const Header = () => {
                 <nav>
                   <ul className="space-y-4">
                     <li>
-                      <a
-                        href="/"
+                      <Link
+                        to="/"
                         aria-label="Home"
                         title="Home"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg" 
                       >
                         Home
-                      </a>
-                    </li>
-                    <li>
-                      <Link
-                        to="/myReviews"
-                        aria-label="My reviews"
-                        title="My reviews"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                      >
-                        My reviews
                       </Link>
                     </li>
                     <li>
                       <Link
-                        to="/addservice"
-                        aria-label="Add Service"
-                        title="Add Service"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        to="/blogs"
+                        aria-label="Home"
+                        title="Home"
+                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg" 
                       >
-                        Add Service
+                        Blogs
                       </Link>
                     </li>
+
+                    {
+                      user?.email &&
+                      <div>
+                        <>
+                          <Link
+                            to="/myReviews"
+                            aria-label="My reviews"
+                            title="My reviews"
+                            className="font-medium pb-16 tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg" 
+                          >
+                            My reviews
+                          </Link>
+                        </>
+                        <br />
+                        <>
+                          <Link
+                            to="/addservice"
+                            aria-label="Add Service"
+                            title="Add Service"
+                            className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg" 
+                          >
+                            Add Service
+                          </Link>
+                        </>
+                      </div>
+                    }
+
                     <li>
                       {
                         user?.uid ?
                           <>
                             <Link
-                              to="/login"
+                              to="/"
                               onClick={handleLogOut}
-                              className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                              className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                               aria-label="LogOut"
                               title="LogOut"
                             >
@@ -207,7 +235,7 @@ const Header = () => {
                           : <>
                             <Link
                               to="/login"
-                              className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                              className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                               aria-label="Login"
                               title="Login"
                             >

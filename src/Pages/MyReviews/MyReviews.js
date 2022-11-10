@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Review from '../Review/Review';
+import Swal from 'sweetalert2';
+import useTitle from '../../Hooks/useTitle';
+
 
 const MyReviews = () => {
+    useTitle('My Reviews')
     const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
 
@@ -20,8 +24,12 @@ const MyReviews = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
-                    if (data.deletedCount < 0) {
+                    Swal.fire(
+                        'Good job!',
+                        'Delete Successfull!',
+                        'success'
+                      )
+                     if (data.deletedCount < 0) {
                         const rev = reviews.filter(odr => odr._id !== id);
                         setReviews(rev);
                     }

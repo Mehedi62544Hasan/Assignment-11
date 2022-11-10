@@ -14,7 +14,7 @@ const Service = () => {
 
     return (
         <div>
-             <div className='flex justify-end mr-8 lg:mr-32 my-10'>
+             <div className='flex justify-end mr-8 lg:mr-32 mb-10'>
                 <Link to="/addservice" className="relative inline-flex items-center justify-center px-6 py-3 text-lg font-medium tracking-tighter text-white bg-gray-800 rounded-md group">
                     <span className="absolute inset-0 w-full h-full mt-1 ml-1 transition-all duration-300 ease-in-out bg-purple-600 rounded-md group-hover:mt-0 group-hover:ml-0"></span>
                     <span className="absolute inset-0 w-full h-full bg-white rounded-md "></span>

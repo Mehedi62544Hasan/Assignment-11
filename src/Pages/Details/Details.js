@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Review from '../Review/Review';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import Swal from 'sweetalert2';
+import useTitle from '../../Hooks/useTitle';
+
 
 const Details = () => {
   const { _id, description, image, model, name, price, rating } = useLoaderData();
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  useTitle('Details')
 
   const email = user?.email;
 
@@ -58,7 +62,11 @@ const Details = () => {
       })
         .then(res => res.json())
         .then(data => {
-          console.log(data)
+          Swal.fire(
+            'Good job!',
+            'Delete Successfull!',
+            'success'
+          )
           if (data.deletedCount < 0) {
             const rev = reviews.filter(odr => odr._id !== id);
             setReviews(rev);
@@ -117,10 +125,13 @@ const Details = () => {
           </div>
         </div>
         <div>
-          <form onSubmit={handlePressOrder}>
-            <textarea name="review" className="textarea textarea-secondary my-4 w-full" placeholder="message"></textarea>
-            <input type="submit" value="Post" className='btn bg-blue-600 px-24' />
-          </form>
+          {
+            user?.email ? <form onSubmit={handlePressOrder}>
+              <textarea name="review" className="textarea textarea-secondary my-4 w-full" placeholder="message"></textarea>
+              <input type="submit" value="Post" className='btn bg-blue-600 px-24' />
+            </form>
+              : <p><span className='font-semibold text-lime-600 mr-1'>User is not logged !!</span><Link to='/login' className='font-bold text-orange-500 text-xl hover:text-blue-600'>Please login</Link></p>
+          }
         </div>
 
       </div>

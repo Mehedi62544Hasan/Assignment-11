@@ -3,11 +3,13 @@ import React, { useContext, useState } from 'react';
  import Swal from 'sweetalert2'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../Hooks/useTitle';
 
 const SignUp = () => {
     const [error, setError] = useState('');
+    useTitle('SignUp');
 
-    const { createAccount, loginGoogle, updateUserProfile, loginGithub } = useContext(AuthContext);
+    const { createAccount, loginGoogle, updateUserProfile } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
 
     const handleCreatAccount = (event) => {

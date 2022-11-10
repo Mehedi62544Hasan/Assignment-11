@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import useTitle from '../../Hooks/useTitle';
 import ServiceAllItems from './ServiceAllItems';
  
 const ServiceAll = () => {
-
+    useTitle('ServiceAll')
     const services = useLoaderData();
     console.log(services)
 

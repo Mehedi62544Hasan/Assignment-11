@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
  import Swal from 'sweetalert2';
  import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../Hooks/useTitle';
 
 
 const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
+    useTitle('Login');
 
     const fromm = location.state?.from?.pathname || "/";
 

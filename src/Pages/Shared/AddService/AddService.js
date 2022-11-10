@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
- import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+ import useTitle from '../../../Hooks/useTitle';
 
 const AddService = () => {
+    useTitle('Add Service')
 
     const handlePressOrder = event => {
         event.preventDefault();
