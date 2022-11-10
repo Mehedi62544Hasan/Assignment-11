@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Review from '../Review/Review';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const Details = () => {
   const { _id, description, image, model, name, price, rating } = useLoaderData();
@@ -67,34 +69,34 @@ const Details = () => {
 
   const handleUpdate = id => {
     fetch(`http://localhost:5000/review/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'content-type' : 'application/json'
-        },
-        body: JSON.stringify({status: 'Success'})
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ status: 'Success' })
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-         if(data.modifiedCount > 0){
-            const remaining = reviews.filter(rev => rev._id !== id);
-            const approving = reviews.find(rev => rev._id === id);
-            approving.status = 'Approved';
-            const newReview = [...remaining, approving];
-            setReviews(newReview);
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data.modifiedCount > 0) {
+          const remaining = reviews.filter(rev => rev._id !== id);
+          const approving = reviews.find(rev => rev._id === id);
+          approving.status = 'Approved';
+          const newReview = [...remaining, approving];
+          setReviews(newReview);
         }
-    })
-}
+      })
+  }
 
   return (
 
     <div className='mt-20'>
       <div>
-        <img
-          src={image}
-          className="w-4/5 mx-auto"
-          alt=""
-        />
+        <PhotoProvider>
+          <PhotoView src={image}>
+            <img src={image} alt="" className="w-4/5 mx-auto" />
+          </PhotoView>
+        </PhotoProvider>
       </div>
       <div className="w-4/5 mx-auto">
         <div className="  mb-6">

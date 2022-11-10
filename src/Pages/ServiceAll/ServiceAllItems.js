@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
-const ServiceAllItems = ({service}) => {
+const ServiceAllItems = ({ service }) => {
 
     const { _id, description, image, model, name, price, rating } = service;
 
@@ -9,11 +11,11 @@ const ServiceAllItems = ({service}) => {
         <div className="px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pb-20">
             <div className="flex flex-col max-w-screen-lg overflow-hidden bg-white border rounded shadow-sm lg:flex-row sm:mx-auto">
                 <div className="relative lg:w-1/2">
-                    <img
-                        src={image}
-                        alt=""
-                        className="object-cover w-full lg:absolute h-80 lg:h-full"
-                    />
+                    <PhotoProvider>
+                        <PhotoView src={image}>
+                            <img src={image} alt="" className="object-cover w-full lg:absolute h-80 lg:h-full" />
+                        </PhotoView>
+                    </PhotoProvider>
                     <svg
                         className="absolute top-0 right-0 hidden h-full text-white lg:inline-block"
                         viewBox="0 0 20 104"
