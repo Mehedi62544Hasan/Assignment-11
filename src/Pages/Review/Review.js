@@ -1,9 +1,9 @@
 import React from 'react';
 import './Review.css';
 
-const Review = ({ serviceReview }) => {
+const Review = ({ serviceReview, handleDelete }) => {
 
-    const { review, model, user } = serviceReview;
+    const { _id, review, model, user } = serviceReview;
 
     return (
         <div className=' bg-white p-2 m-5 lg:w-3/5 rounded-md'>
@@ -16,7 +16,7 @@ const Review = ({ serviceReview }) => {
                         <p><small>{model}</small></p>
                         <div>
                             <button className='button'>Update</button>
-                            <button className="button">Delete</button>
+                            <button onClick={() => handleDelete(_id)} className="button">Delete</button>
                         </div>
                     </div>
                 </div>

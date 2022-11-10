@@ -8,11 +8,10 @@ const Details = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
 
-  const {email} = user;
+  const { email } = user;
 
   const handlePressOrder = event => {
     event.preventDefault()
-    handleHaveUser()
     const review = event.target.review.value;
     console.log(name, model, description, price, rating, image)
 
@@ -48,12 +47,24 @@ const Details = () => {
       .then(data => setReviews(data))
   }, [reviews])
 
-
-  const handleHaveUser = () =>{
- 
-  }
-
   const itemsReview = reviews.filter(rev => _id === rev?.id)
+
+  const handleDelete = id => {
+    const proceed = window.confirm('are you want to delete products');
+    if (proceed) {
+      fetch(`http://localhost:5000/review/${id}`, {
+        method: 'DELETE'
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          if (data.deletedCount < 0) {
+            const rev = reviews.filter(odr => odr._id !== id);
+            setReviews(rev);
+          }
+        })
+    }
+  }
 
   return (
 
@@ -95,8 +106,9 @@ const Details = () => {
       <div>
         {
           itemsReview.map(review => <Review
-          key={review._id}
-          serviceReview={review}
+            key={review._id}
+            serviceReview={review}
+            handleDelete={handleDelete}
           ></Review>)
         }
       </div>
