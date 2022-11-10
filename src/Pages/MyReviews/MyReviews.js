@@ -29,6 +29,27 @@ const MyReviews = () => {
         }
     }
 
+
+    const handleUpdate = id => {
+        fetch(`http://localhost:5000/review/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'Success' })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    const remaining = reviews.filter(rev => rev._id !== id);
+                    const approving = reviews.find(rev => rev._id === id);
+                    approving.status = 'Approved';
+                    const newReview = [...remaining, approving];
+                    setReviews(newReview);
+                }
+            })
+    }
+
     return (
         <div className='mt-16 lg:ml-10'>
             {
@@ -36,6 +57,7 @@ const MyReviews = () => {
                     key={review._id}
                     serviceReview={review}
                     handleDelete={handleDelete}
+                    handleUpdate={handleUpdate}
                 ></Review>)
             }
         </div>
@@ -43,3 +65,5 @@ const MyReviews = () => {
 };
 
 export default MyReviews;
+
+

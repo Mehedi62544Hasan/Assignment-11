@@ -8,7 +8,7 @@ const Details = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
 
-  const { email } = user;
+  const email = user?.email;
 
   const handlePressOrder = event => {
     event.preventDefault()
@@ -32,7 +32,6 @@ const Details = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         if (data.acknowledged) {
           event.target.reset()
           alert('post successfully')
@@ -65,6 +64,27 @@ const Details = () => {
         })
     }
   }
+
+  const handleUpdate = id => {
+    fetch(`http://localhost:5000/review/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'content-type' : 'application/json'
+        },
+        body: JSON.stringify({status: 'Success'})
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+         if(data.modifiedCount > 0){
+            const remaining = reviews.filter(rev => rev._id !== id);
+            const approving = reviews.find(rev => rev._id === id);
+            approving.status = 'Approved';
+            const newReview = [...remaining, approving];
+            setReviews(newReview);
+        }
+    })
+}
 
   return (
 
@@ -103,11 +123,12 @@ const Details = () => {
 
       </div>
 
-      <div>
+      <div className='lg:ml-28'>
         {
           itemsReview.map(review => <Review
             key={review._id}
             serviceReview={review}
+            handleUpdate={handleUpdate}
             handleDelete={handleDelete}
           ></Review>)
         }
