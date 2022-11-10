@@ -73,7 +73,7 @@ const Login = () => {
     const comingSoon = () => {
         Swal.fire(
             'Coming Soon!',
-            'Please Login Google or Github!',
+            'Please Login Google!',
             'question'
         )
     }
