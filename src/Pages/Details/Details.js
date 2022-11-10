@@ -8,6 +8,8 @@ const Details = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
 
+  const {email} = user;
+
   const handlePressOrder = event => {
     event.preventDefault()
     handleHaveUser()
@@ -16,7 +18,9 @@ const Details = () => {
 
     const addService = {
       user,
+      email,
       review,
+      model,
       id: _id
     }
 
@@ -53,7 +57,7 @@ const Details = () => {
 
   return (
 
-    <div>
+    <div className='mt-20'>
       <div>
         <img
           src={image}

@@ -51,7 +51,7 @@ const AddService = () => {
                     <input name="model" type="text" placeholder="Model" className="input input-bordered input-secondary w-full" />
                     <input name="price" type="text" placeholder="Price" className="input input-bordered input-secondary w-full" />
                     <input name="rating" type="text" placeholder="Rating" className="input input-bordered input-secondary w-full" />
-                    <input name="image" type="text" placeholder="Image" className="input input-bordered input-secondary w-full" />
+                    <input name="image" type="text" placeholder="ImageURL" className="input input-bordered input-secondary w-full" />
                 </div>
                 <textarea name="description" className="textarea textarea-secondary my-4 w-full" placeholder="description"></textarea>
                 <input type="submit" value="Post" className='btn bg-blue-600 px-24' />
